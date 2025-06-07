@@ -1,0 +1,73 @@
+@DesafioLivrariaAPICSharp_HostAddress = http://localhost:5176
+
+###  
+# GET all books  
+GET {{DesafioLivrariaAPICSharp_HostAddress}}/api/Books  
+Accept: application/json  
+
+###  
+# GET a single book by ID  
+GET {{DesafioLivrariaAPICSharp_HostAddress}}/api/Books/1  
+Accept: application/json  
+
+###  
+# POST create a new book  
+POST {{DesafioLivrariaAPICSharp_HostAddress}}/api/Books  
+Content-Type: application/json  
+
+{
+  "title": "The Hobbit",
+  "author": "J.R.R. Tolkien",
+  "genre": "Fantasy",
+  "price": 49.90,
+  "stockQuantity": 10
+}
+
+###  
+# POST duplicate book to trigger 409 Conflict  
+POST {{DesafioLivrariaAPICSharp_HostAddress}}/api/Books  
+Content-Type: application/json  
+
+{
+  "title": "1984",
+  "author": "George Orwell",
+  "genre": "Fiction",
+  "price": 29.90,
+  "stockQuantity": 5
+}
+
+###  
+# PUT update an existing book  
+PUT {{DesafioLivrariaAPICSharp_HostAddress}}/api/Books/1  
+Content-Type: application/json  
+
+{
+  "id": 1,
+  "title": "1984",
+  "author": "George Orwell",
+  "genre": "Dystopian",
+  "price": 24.90,
+  "stockQuantity": 15
+}
+
+###  
+# PUT to cause conflict with another book  
+PUT {{DesafioLivrariaAPICSharp_HostAddress}}/api/Books/2  
+Content-Type: application/json  
+
+{
+  "id": 2,
+  "title": "The Hobbit",
+  "author": "J.R.R. Tolkien",
+  "genre": "Fantasy",
+  "price": 49.90,
+  "stockQuantity": 10
+}
+
+###  
+# DELETE a book  
+DELETE {{DesafioLivrariaAPICSharp_HostAddress}}/api/Books/1  
+
+###  
+# DELETE non-existent book (should return 404)  
+DELETE {{DesafioLivrariaAPICSharp_HostAddress}}/api/Books/999  
